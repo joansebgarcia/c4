@@ -5,6 +5,10 @@
 
 int main(void)
 {
-    assert(strcmp(c4_hello(), "Hello, World!") == 0);
+    const char *result = c4_hello();
+    assert(strcmp(result, "Hello, World!") == 0);
+    if (strcmp(result, "Hello, World!") != 0) {
+        return 1;
+    }
     return 0;
 }
