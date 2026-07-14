@@ -2,11 +2,10 @@
 #define C4_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-const char *c4_hello(void);
+const char* c4_hello(void);
 
 #ifdef __cplusplus
 }
