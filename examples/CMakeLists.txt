@@ -1,2 +1,2 @@
-add_executable(c4_hello hello.c)
-target_link_libraries(c4_hello PRIVATE c4::c4 c4_warnings)
+add_executable(c4_tcp_example tcp.c)
+target_link_libraries(c4_tcp_example PRIVATE c4_warnings)
