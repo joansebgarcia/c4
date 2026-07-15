@@ -1,5 +1,8 @@
 BasedOnStyle: Google
 
+TabWidth: 2
+ColumnLimit: 80
+
 AllowShortBlocksOnASingleLine: Never
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
@@ -13,3 +16,7 @@ IncludeBlocks: Regroup
 BitFieldColonSpacing: Both
 SpaceAfterCStyleCast: true
 SpaceAfterLogicalNot: false
+
+BinPackParameters: false
+BinPackArguments: false
+AlignAfterOpenBracket: BlockIndent
