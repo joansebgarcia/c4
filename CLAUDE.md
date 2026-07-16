@@ -28,7 +28,7 @@
 include/c4/       ← Public headers (.h) — the only files consumers include
 src/               ← Implementation (.cc files), CMakeLists.txt registers each source
 tests/             ← ctest-registered test executables (.cc), one assertion suite per unit
-examples/          ← Standalone runnable programs demonstrating usage of the public API (empty until the framework exists)
+samples/           ← Standalone runnable programs demonstrating usage of the public API (empty until the framework exists)
 docs/learn/        ← Reference-only scratch code from learning sessions in C (not built by CMake)
 cmake/             ← Shared CMake modules (CompilerWarnings.cmake, etc.)
 build/             ← Generated — never hand-edit, never commit

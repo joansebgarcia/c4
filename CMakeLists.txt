@@ -8,13 +8,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(CompilerWarnings)
 
-option(C4_BUILD_EXAMPLES "Build c4 examples" ON)
+option(C4_BUILD_SAMPLES "Build c4 samples" ON)
 option(C4_BUILD_TESTS "Build c4 tests" ON)
 
 add_subdirectory(src)
 
-if(C4_BUILD_EXAMPLES)
-    add_subdirectory(examples)
+if(C4_BUILD_SAMPLES)
+    add_subdirectory(samples)
 endif()
 
 if(C4_BUILD_TESTS)

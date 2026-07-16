@@ -3,8 +3,9 @@
 Minimal, zero-copy HTTP/1.1 server framework for C++, inspired by Express.
 
 > Status: early scaffold — the HTTP framework itself has not been implemented
-> yet. This currently builds a hello-world library, example, and test suite
-> to validate the toolchain.
+> yet. This currently builds a hello-world library and test suite to
+> validate the toolchain; `samples/` is reserved for usage demos once the
+> public API exists.
 
 ## Requirements
 
@@ -16,12 +17,6 @@ Minimal, zero-copy HTTP/1.1 server framework for C++, inspired by Express.
 ```sh
 cmake -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
-```
-
-## Run the example
-
-```sh
-./build/examples/c4_hello
 ```
 
 ## Run the tests
