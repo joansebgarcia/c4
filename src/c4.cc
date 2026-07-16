@@ -1,5 +1,9 @@
 #include "c4/c4.h"
 
-const char* c4_hello(void) {
+namespace c4 {
+
+const char* Hello() {
   return "Hello, World!";
 }
+
+}  // namespace c4

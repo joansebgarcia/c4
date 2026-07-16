@@ -1,14 +1,10 @@
-#ifndef C4_H
-#define C4_H
+#ifndef C4_INCLUDE_C4_C4_H_
+#define C4_INCLUDE_C4_C4_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+namespace c4 {
 
-const char* c4_hello(void);
+const char* Hello();
 
-#ifdef __cplusplus
-}
-#endif
+}  // namespace c4
 
-#endif /* C4_H */
+#endif  // C4_INCLUDE_C4_C4_H_
