@@ -1,12 +1,12 @@
 #include <cassert>
-#include <cstring>
+#include <string>
 
 #include "c4/c4.h"
 
 int main() {
-  const char* result = c4::Hello();
-  assert(std::strcmp(result, "Hello, World!") == 0);
-  if (std::strcmp(result, "Hello, World!") != 0) {
+  const std::string result = c4::Hello();
+  assert(result == "Hello, World!");
+  if (result != "Hello, World!") {
     return 1;
   }
   return 0;

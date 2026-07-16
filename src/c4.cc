@@ -2,7 +2,7 @@
 
 namespace c4 {
 
-const char* Hello() {
+std::string Hello() {
   return "Hello, World!";
 }
 
