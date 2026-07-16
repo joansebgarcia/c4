@@ -1,6 +1,6 @@
 # c4
 
-Minimal, zero-copy HTTP/1.1 server framework for C, inspired by Express.
+Minimal, zero-copy HTTP/1.1 server framework for C++, inspired by Express.
 
 > Status: early scaffold — the HTTP framework itself has not been implemented
 > yet. This currently builds a hello-world library, example, and test suite
@@ -9,7 +9,7 @@ Minimal, zero-copy HTTP/1.1 server framework for C, inspired by Express.
 ## Requirements
 
 - CMake >= 3.16
-- A C17 compiler (gcc or clang)
+- A C++20 compiler (gcc or clang)
 
 ## Build
 
