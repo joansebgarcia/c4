@@ -7,13 +7,21 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#define C4_MAX_HEADERS 16
 #define C4_PORT 8080
 #define C4_BACKLOG 5
 #define C4_BUFFER_SIZE 4096
 
 typedef struct {
+  char name[64];
+  char value[192];
+} c4_header;
+
+typedef struct {
   char method[8];
   char path[256];
+  c4_header headers[C4_MAX_HEADERS];
+  size_t header_count;
 } c4_request;
 
 static volatile sig_atomic_t g_running = 1;
@@ -41,6 +49,56 @@ static int parse_request_line(const char* buffer, c4_request* req) {
 
   snprintf(req->method, sizeof(req->method), "%s", method);
   snprintf(req->path, sizeof(req->path), "%s", path);
+
+  return 0;
+}
+
+static int parse_headers(const char* buffer, c4_request* req) {
+  const char* line_start = strstr(buffer, "\r\n");
+  if (line_start == NULL) {
+    return 1;
+  }
+
+  line_start += 2;  // Jump the "\r\n" of the request
+
+  req->header_count = 0;
+
+  while (line_start[0] != '\r' && req->header_count < C4_MAX_HEADERS) {
+    const char* line_end = strstr(line_start, "\r\n");
+    const char* colon = strchr(line_start, ':');
+    const char* value_start = colon + 1;
+
+    if (line_end == NULL) {
+      return -1;
+    }
+
+    if (colon == NULL || colon > line_end) {
+      return -1;
+    }
+    while (*value_start == ' ') {
+      value_start++;
+    }
+
+    c4_header* header = &req->headers[req->header_count];
+    snprintf(
+        header->name,
+        sizeof(header->name),
+        "%.*s",
+        (int) (colon - line_start),
+        line_start
+    );
+
+    snprintf(
+        header->value,
+        sizeof(header->value),
+        "%.*s",
+        (int) (line_end - value_start),
+        value_start
+    );
+
+    req->header_count++;
+    line_start = line_end + 2;
+  }
 
   return 0;
 }
@@ -112,6 +170,16 @@ static void handle_client(int client_fd) {
   }
 
   printf("method=[%s] path=[%s]\n", req.method, req.path);
+
+  if (parse_headers(request, &req) == -1) {
+    fprintf(stderr, "malformed headers\n");
+    close(client_fd);
+    return;
+  }
+
+  for (size_t i = 0; i < req.header_count; i++) {
+    printf("header: [%s] = [%s]\n", req.headers[i].name, req.headers[i].value);
+  }
 
   char response[C4_BUFFER_SIZE];
   size_t response_len = build_hello_response(response, sizeof(response));
