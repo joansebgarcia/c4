@@ -11,6 +11,11 @@
 #define C4_BACKLOG 5
 #define C4_BUFFER_SIZE 4096
 
+typedef struct {
+  char method[8];
+  char path[256];
+} c4_request;
+
 static volatile sig_atomic_t g_running = 1;
 
 static void handle_sigint(int sig) {
@@ -21,6 +26,23 @@ static void handle_sigint(int sig) {
 static void die(const char* what) {
   perror(what);
   exit(1);
+}
+
+static int parse_request_line(const char* buffer, c4_request* req) {
+  char line[C4_BUFFER_SIZE];
+  snprintf(line, sizeof(line), "%s", buffer);
+
+  char* method = strtok(line, " ");
+  char* path = strtok(NULL, " ");
+
+  if (method == NULL || path == NULL) {
+    return -1;
+  }
+
+  snprintf(req->method, sizeof(req->method), "%s", method);
+  snprintf(req->path, sizeof(req->path), "%s", path);
+
+  return 0;
 }
 
 static int create_listening_socket(uint16_t port) {
@@ -81,6 +103,15 @@ static void handle_client(int client_fd) {
     close(client_fd);
     return;
   }
+
+  c4_request req;
+  if (parse_request_line(request, &req) == -1) {
+    fprintf(stderr, "malformed request line\n");
+    close(client_fd);
+    return;
+  }
+
+  printf("method=[%s] path=[%s]\n", req.method, req.path);
 
   char response[C4_BUFFER_SIZE];
   size_t response_len = build_hello_response(response, sizeof(response));
