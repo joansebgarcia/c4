@@ -1,8 +1,5 @@
 BasedOnStyle: Google
 
-TabWidth: 2
-ColumnLimit: 80
-
 AllowShortBlocksOnASingleLine: Never
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
