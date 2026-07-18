@@ -1,4 +1,4 @@
-add_library(c4 STATIC c4.cc)
+add_library(c4 STATIC c4.cc response.cc)
 add_library(c4::c4 ALIAS c4)
 
 target_include_directories(c4
