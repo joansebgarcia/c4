@@ -24,6 +24,12 @@ typedef struct {
   size_t header_count;
 } c4_request;
 
+typedef struct {
+  const char* method;
+  const char* path;
+  size_t (*handler)(char* out, size_t out_size);
+} c4_route;
+
 static volatile sig_atomic_t g_running = 1;
 
 static void handle_sigint(int sig) {
@@ -152,8 +158,52 @@ static size_t build_hello_response(char* out, size_t out_size) {
   return (size_t) written;
 }
 
+static size_t build_bye_response(char* out, size_t out_size) {
+  const char* body = "Other responses, other route\n";
+
+  int written = snprintf(
+      out,
+      out_size,
+      "HTTP/1.1 200 OK\r\n"
+      "Content-Type: text/plain\r\n"
+      "Content-Length: %zu\r\n"
+      "Connection: close\r\n"
+      "\r\n"
+      "%s",
+      strlen(body),
+      body
+  );
+
+  return (size_t) written;
+}
+
+static size_t build_not_found_response(char* out, size_t out_size) {
+  const char* body = "Route Not Found 404\n";
+
+  int written = snprintf(
+      out,
+      out_size,
+      "HTTP/1.1 404 not found\r\n"
+      "Content-Type: text/plain\r\n"
+      "Content-Length: %zu\r\n"
+      "Connection: close\r\n"
+      "\r\n"
+      "%s",
+      strlen(body),
+      body
+  );
+
+  return (size_t) written;
+}
+
 static void handle_client(int client_fd) {
   char request[C4_BUFFER_SIZE] = {0};
+  c4_route routes[] = {
+      {"GET", "/hello", build_hello_response},
+      {"GET", "/bye", build_bye_response},
+  };
+
+  size_t route_count = sizeof(routes) / sizeof(routes[0]);
 
   ssize_t bytes_read = read(client_fd, request, sizeof(request) - 1);
   if (bytes_read == -1) {
@@ -182,7 +232,14 @@ static void handle_client(int client_fd) {
   }
 
   char response[C4_BUFFER_SIZE];
-  size_t response_len = build_hello_response(response, sizeof(response));
+  size_t response_len = build_not_found_response(response, sizeof(response));
+
+  for (size_t i = 0; i < route_count; i++) {
+    if (strcmp(req.method, routes[i].method) == 0 &&
+        strcmp(req.path, routes[i].path) == 0) {
+      response_len = routes[i].handler(response, sizeof(response));
+    }
+  }
 
   if (write(client_fd, response, response_len) == -1) {
     perror("write");
