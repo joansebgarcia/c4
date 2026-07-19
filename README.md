@@ -2,11 +2,6 @@
 
 Minimal, zero-copy HTTP/1.1 server framework for C++, inspired by Express.
 
-> Status: early scaffold — the HTTP framework itself has not been implemented
-> yet. This currently builds a hello-world library and test suite to
-> validate the toolchain; `samples/` is reserved for usage demos once the
-> public API exists.
-
 ```cpp
 #include "c4/app.h"
 
