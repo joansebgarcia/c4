@@ -1,6 +1,6 @@
-#include "c4/request.h"
+#include "h3/request.h"
 
-namespace c4 {
+namespace h3 {
 Request::Request(std::string method, std::string path, std::string body,
                  std::vector<std::pair<std::string, std::string>> headers)
     : method_(std::move(method)),
@@ -39,4 +39,4 @@ std::optional<std::string_view> Request::Param(std::string_view name) const {
 
   return std::nullopt;
 }
-}  // namespace c4
+}  // namespace h3

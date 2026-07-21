@@ -1,6 +1,6 @@
-add_library(c4_warnings INTERFACE)
+add_library(h3_warnings INTERFACE)
 
-target_compile_options(c4_warnings INTERFACE
+target_compile_options(h3_warnings INTERFACE
     -Wall
     -Wextra
     -Wpedantic
@@ -8,11 +8,11 @@ target_compile_options(c4_warnings INTERFACE
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_options(c4_warnings INTERFACE
+    target_compile_options(h3_warnings INTERFACE
         -fsanitize=address,undefined
         -fno-omit-frame-pointer
     )
-    target_link_options(c4_warnings INTERFACE
+    target_link_options(h3_warnings INTERFACE
         -fsanitize=address,undefined
     )
 endif()

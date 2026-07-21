@@ -1,8 +1,8 @@
-#include "c4/response.h"
+#include "h3/response.h"
 
 #include <sstream>
 
-namespace c4 {
+namespace h3 {
 
 Response::Response() : content_type_("text/plain") {}
 
@@ -42,4 +42,4 @@ std::string Response::Build() const {
   return out.str();
 }
 
-}  // namespace c4
+}  // namespace h3

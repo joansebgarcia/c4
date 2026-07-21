@@ -1,5 +1,5 @@
-#ifndef C4_INCLUDE_C4_REQUEST_H_
-#define C4_INCLUDE_C4_REQUEST_H_
+#ifndef H3_INCLUDE_H3_REQUEST_H_
+#define H3_INCLUDE_H3_REQUEST_H_
 
 #include <optional>
 #include <string>
@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-namespace c4 {
+namespace h3 {
 
 class Request {
  public:
@@ -28,6 +28,6 @@ class Request {
   std::vector<std::pair<std::string, std::string>> params_;
 };
 
-}  // namespace c4
+}  // namespace h3
 
-#endif  // C4_INCLUDE_C4_REQUEST_H_
+#endif  // H3_INCLUDE_H3_REQUEST_H_

@@ -1,15 +1,15 @@
-#ifndef C4_INCLUDE_C4_APP_H_
-#define C4_INCLUDE_C4_APP_H_
+#ifndef H3_INCLUDE_H3_APP_H_
+#define H3_INCLUDE_H3_APP_H_
 
 #include <cstdint>
 #include <functional>
 #include <memory>
 #include <string_view>
 
-#include "c4/request.h"
-#include "c4/response.h"
+#include "h3/request.h"
+#include "h3/response.h"
 
-namespace c4 {
+namespace h3 {
 
 using Handler = std::function<void(const Request&, Response&)>;
 
@@ -28,6 +28,6 @@ class App {
   std::unique_ptr<Impl> impl_;
 };
 
-}  // namespace c4
+}  // namespace h3
 
-#endif  // C4_INCLUDE_C4_APP_H_
+#endif  // H3_INCLUDE_H3_APP_H_

@@ -1,10 +1,10 @@
-#ifndef C4_INCLUDE_C4_RESPONSE_H_
-#define C4_INCLUDE_C4_RESPONSE_H_
+#ifndef H3_INCLUDE_H3_RESPONSE_H_
+#define H3_INCLUDE_H3_RESPONSE_H_
 
 #include <string>
 #include <string_view>
 
-namespace c4 {
+namespace h3 {
 
 class Response {
  public:
@@ -24,6 +24,6 @@ class Response {
   std::string body_;
 };
 
-}  // namespace c4
+}  // namespace h3
 
-#endif  // C4_INCLUDE_C4_RESPONSE_H_
+#endif  // H3_INCLUDE_H3_RESPONSE_H_
