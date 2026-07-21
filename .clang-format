@@ -1,19 +1,6 @@
-BasedOnStyle: Google
+# Run manually to reformat a file:
+# clang-format -i --style=file <file>
+Language:        Cpp
+BasedOnStyle:  Google
 
-AllowShortBlocksOnASingleLine: Never
-AllowShortFunctionsOnASingleLine: None
-AllowShortIfStatementsOnASingleLine: Never
-AllowShortLoopsOnASingleLine: false
-
-AlwaysBreakBeforeMultilineStrings: true
-BreakStringLiterals: true
-
-IncludeBlocks: Regroup
-
-BitFieldColonSpacing: Both
-SpaceAfterCStyleCast: true
-SpaceAfterLogicalNot: false
-
-BinPackParameters: false
-BinPackArguments: false
-AlignAfterOpenBracket: BlockIndent
+AllowShortFunctionsOnASingleLine: Empty
