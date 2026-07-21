@@ -30,9 +30,8 @@ std::string Response::Build() const {
   }
 
   return "HTTP/1.1 " + std::to_string(status_code_) + " " +
-         std::string(status_text) + "\r\n" + "Content-Type: " +
-         content_type_ + "\r\n" +
-         "Content-Length: " + std::to_string(body_.size()) + "\r\n" +
+         std::string(status_text) + "\r\n" + "Content-Type: " + content_type_ +
+         "\r\n" + "Content-Length: " + std::to_string(body_.size()) + "\r\n" +
          "Connection: close\r\n" + "\r\n" + body_;
 }
 
