@@ -2,8 +2,8 @@
 
 namespace c4 {
 
-std::string Hello() {
-  return "Hello, World!";
+std::string Health() {
+  return "Health!";
 }
 
 }  // namespace c4

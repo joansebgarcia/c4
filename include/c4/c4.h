@@ -5,7 +5,7 @@
 
 namespace c4 {
 
-std::string Hello();
+std::string Health();
 
 }  // namespace c4
 
