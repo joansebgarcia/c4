@@ -1,5 +1,7 @@
 #include "c4/response.h"
 
+#include <sstream>
+
 namespace c4 {
 
 Response::Response() : content_type_("text/plain") {}
@@ -29,10 +31,15 @@ std::string Response::Build() const {
     status_text = "Not Found";
   }
 
-  return "HTTP/1.1 " + std::to_string(status_code_) + " " +
-         std::string(status_text) + "\r\n" + "Content-Type: " + content_type_ +
-         "\r\n" + "Content-Length: " + std::to_string(body_.size()) + "\r\n" +
-         "Connection: close\r\n" + "\r\n" + body_;
+  std::ostringstream out;
+  out << "HTTP/1.1 " << status_code_ << " " << status_text << "\r\n"
+      << "Content-Type: " << content_type_ << "\r\n"
+      << "Content-Length: " << body_.size() << "\r\n"
+      << "Connection: close\r\n"
+      << "\r\n"
+      << body_;
+
+  return out.str();
 }
 
 }  // namespace c4
