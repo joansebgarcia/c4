@@ -1,14 +1,20 @@
-# c4
+# h3
 
 Minimal, zero-copy HTTP/1.1 server framework for C++, inspired by Express.
 
+This project is a C++ port of [h3](https://github.com/h3js/h3), the
+minimal H(TTP) framework for JavaScript. It borrows h3's API design and
+philosophy — a small, composable core with an Express-like routing
+surface — and reimplements a simplified subset of it in modern C++,
+without any of the original JavaScript source.
+
 ```cpp
-#include "c4/app.h"
+#include "h3/app.h"
 
 int main() {
-  c4::App app;
+  h3::App app;
 
-  app.Get("/", [](const c4::Request& req, c4::Response& res) {
+  app.Get("/", [](const h3::Request& req, h3::Response& res) {
     res.Send("Hello World");
   });
 
@@ -18,7 +24,7 @@ int main() {
 }
 ```
 
-Everything under `include/c4/` is meant to stay this small: `App`,
+Everything under `include/h3/` is meant to stay this small: `App`,
 `Request`, `Response`. Sockets, HTTP parsing, and routing are
 implementation details that live in `src/` and never leak into a public
 header.
